@@ -1,0 +1,237 @@
+We have the normal rule for a binary tree:
+ - Every node in the tree has at most two children
+
+But now we have one more added rule:
+ - A node's left child must have a key less than its parent's key, and a node's right child must have a key greater than
+   or equal to its parent's key
+
+So basically we if we are inserting a node into the tree, we know exactly where to insert it at because of this new
+rule.
+
+Example)
+
+        50
+       /  \
+      45   60
+     / \
+    40 47
+
+
+So, the left child's key must be less than its parent node
+and, the right child's key must be greater than or equal to its parent node
+
+Now say we wanted to insert another 60, well that would be inserted as the right child of the current node with a key
+of 60. Because REMEMBER: Right child is greater than or equal to
+
+So, a binary search tree may seem similar to a sorted array
+
+Say we have a sorted/ordered array with values:
+ - 2, 4, 5, 9
+
+These values will always be in the same order no matter what sequence we insert it in.
+
+BUT, with a binary search tree, the order in which we insert the values will change the overall structure of the tree
+
+For example)
+
+Let's insert into the binary search tree in this order: 2, 4, 9, 5
+We get:
+
+        2
+         \
+          4
+           \
+            9
+           /
+           5
+
+Now let's insert in a different order: 9, 2, 4, 5
+We get:
+
+        9
+       /
+      2
+       \
+        4
+         \
+          5
+
+
+So... clearly both of these trees have the same values, but have a completely different structure due the order
+the values were inserted
+
+Does this matter?
+Yes, it can mess with the efficiency of the operation when we insert our values in odd ways
+
+Additionally, it's clear that these trees don't look like your basic tree
+
+Say we had a tree and all children were right children
+
+        2
+         \
+          4
+           \
+            9
+             \
+              10
+
+Well, this is basically just a linked list and defeats the purpose of a binary search tree
+
+So... based on the three examples above, what are these trees called?
+They are considered an:
+
+Unbalanced Binary Search Tree:
+ - Basically the left/right side has more nodes than their respective side
+ - Incredibly inefficient. Say we want to get to 10 in the example above. Well, that is O(n) b/c we are searching
+   through every node
+
+What's the difference in an Ordered Array and Binary search tree:
+Ordered arrays we use the specific order to get quick serach times with our values
+where as binary search trees use the structure of the tree to get quick search times
+
+So... how do we make sure that our binary search trees aren't unbalanced?
+
+Well, we need to make sure that all of the
+data values we are wanting to insert are all in a random order before inserting
+For example, say some data scientist wants to insert names into a binary search tree, but first orders the name in
+alphabetical order. Well, we are going to get a very unbalanced tree. At this point this defeats the purpose of the
+binary search tree
+What this scientist should do is get all of these names in a random order and then insert them into the binary search
+tree
+
+But... it's also important to note that it is very rare to get a perfect fully balanced tree. That's okay though,
+we mainly are just trying to get a mix of fully balanced and fully unbalanced.
+
+Note: if you have a fully balanced binary search tree, then all the subtrees are also fully balanced
+
+Overall, the key thing to take away here is that we lose efficiency the more unbalanced we get
+
+**Implementing a Binary Search Tree*
+
+1)
+One way is storing the nodes in an array.
+ - But, in order to do this we have to be very specific with how the nodes are stored in an array
+
+2)
+Another way is following a linked list style with left and right pointers pointing to the left child and right child
+ - The biggest downside of using this style is that we will take up more memory
+
+We are going to focus on the second option
+
+Operations:
+ - Search:
+   - If the tree is fully balanced, then we will achieve O(log(n)) speeds
+   - If the tree is completely unbalanced, then we will get O(n) speeds
+   - On average, you will obtain O(log(n))
+ - Insert:
+   - O(log(n)) on average, assuming that the tree is not completely unbalanced
+ - Traversal:
+   - We can traverse a tree in pre-order, in-order, post-order
+   - In-order: We basically start at the lowest or highest number and traverse in order
+   - Pre-order: Which ones were inserted "first" so we start with root then children, then children after that, etc
+   - Post-order: Other way around
+   - BUT... the most common traversal is in-order. It uses recursion.
+   - BUT... if we use the stack implementation we will obtain O(n) speeds
+ - Delete:
+   - There are three cases to consider
+     - The node to be deleted is a leaf
+     - The node to be deleted has one child
+     - The node to be deleted has two children.
+
+SEARCH:
+
+Let's search 65
+
+        50
+       /  \
+      45   60
+     /     / \
+    43    55 63
+               \
+                65
+
+We'll start at 50 and decide if we go to the right or left node. We go to the right since we are searching for 65 and
+60 is greater than 50. We then go to 63 since 65 is greater than 60, then go to 65 since 65 is greater than 63
+
+INSERT:
+
+Firstly, we will want to run find with our goal of the value we are inserting. The way we know we are ready to insert
+is if the node we are currently on is pointing to none.
+
+        5
+       /  \
+      3    20
+     / \     \
+    2   4     25
+
+If the key value of the node being inserted is equal to a value already in the binary search tree, then we do not
+insert. No duplicates allowed
+
+
+BEFORE going over Traversal, let's review Recursion:
+
+There are two parts to a recursive algorithm
+ - Base Case: Simplest scenario that does not require further recursion. (A.K.A termination condition) Prevents the
+   function from calling itself infinitely
+ - Recursive Case: The scenario where the function calls itself w/ modified arguments. It solves the larger problem by
+   breaking it down into smaller instances of the same problem.
+
+def factorial(n):
+   # base case
+   if n == 0:
+       return 1
+
+   # Recursive case
+   return n * factorial(n - 1)
+
+
+factorial(5)
+
+
+is 5 0? No so store on stack:
+[5 * _]
+Now call n * factorial(5-1)
+is 4 0? No so store on stack:
+[4 * _]
+Now call n * factorial(4-1)
+is 3 0? No so store on stack:
+[3 * _]
+Now call n * factorial(3-1)
+is 2 0? No so store on stack:
+[2 * _]
+Now call n * factorial(2-1)
+is 1 0? No so store on stack:
+[1 * _]
+is 0 0? Yes so return 1 * 1
+
+Now go through the stack filling in blanks
+
+(5*(4*(3*(2*(1))))
+
+
+DELETE:
+
+        5
+       /  \
+      3    20
+     / \     \
+    2   4     25
+
+if we want to just delete a leaf, then it is easy and all we have to do is just delete the node
+BUT, if we want to delete some sub tree root node, then we run into problems.
+
+Let's start with deleting a leaf
+ - Search down the tree to the value to be deleted, and set the left or right child pointer for the parent to none
+
+Deleting a node with one child
+ - Say we want to remove 20. We need to take the 20's parent, which is 5, and point its child 25 to the new parent 5
+ - So, we want to take the target nodes parent and set the parents child pointer to the target nodes child
+
+Deleting a node with two children
+ - The trick is to us the successor method
+ - Successor: It is the next largest key to the one we are wanting to remove
+   - The way we find the successor is going to the targets right child and continue down the left side of the right
+     child's subtree until we get to the last node. The last node will be the successor
+
+BUT... then what do we do if the successor has children. What do we do with the children.
+We are going to have to run a recursive algorithm to keep finding successors and moving them

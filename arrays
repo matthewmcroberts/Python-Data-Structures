@@ -1,0 +1,93 @@
+The four operations of an array:
+ - Insert
+ - Search
+ - Delete
+ - Traversal (Traversing)
+
+Python only has ArrayLists, not Arrays.
+ArrayList's are expandable, there doesn't have to be a set size.
+Array's do have to have a set size. ArrayList's are newer, back in the day there had to be memory constraints
+due to computers not having that much ram
+
+SO:
+This example is Python List's (Which are ArrayLists not Arrays)
+
+my_list = []
+my_list[0] = 5
+my_list[1] = 6
+
+Lets now go over Array operations (KEEP IN MIND ARRAY'S ARE UNORDERED LISTS)
+
+
+Inserts
+
+INSERT 4:
+
+ [2|3| | | ]
+      ^ Pointer
+ [2|3|4| | ]
+        ^ Pointer (Moves over to the next empty spot)
+SO, if an Array is full, the pointer will be out of bounds throwing an exception
+Remember: Inserting into an Array is O(1)
+
+
+Search
+
+A search technically returns the index of the value, not the actual value
+
+SEARCH 2:
+
+[0|2| | ]
+     ^ n item
+
+b/c the search number is 2, each number in the array is compared until it finds 2, then it will return the index of the 
+value. This is basically done with a for loop, so big O would be O(n). Keep in mind, if there are duplicates of what is
+searched, it will only return the index of the first occurrence of the value.
+
+
+Delete
+
+Search item, set item location to none to remove space/memory taken up, then decrement the pointer of the array
+
+DELETE 3:
+
+ [0|2|3| ]
+        ^ Pointer (n item)
+ [0|2| | ]
+      ^ Pointer (n item)
+     
+DELETE 0:
+
+ [0|2|3| ]
+        ^ Pointer
+ [ |2|3| ]
+      ^ Pointer
+ [2|3| | ]
+      ^ Pointer
+     
+The way the elements are moved back is we create a new pointer j (pointer J is not shown above)at the spot where the 
+element was deleted, and this pointer keeps moving the element back one until the pointer reaches an empty space, then 
+it stops
+
+Big O Notation would still be O(n), b/c the pointer is still going through a for loop. But, believe it or not,
+our new pointer j is basically ignored speed wise, so that's why Big O Notation isn't O(n^2)
+
+
+Traversal
+
+Similar to searching, but the goal isn't to find the index, the goal is to loop over every value and do some operation
+to it
+
+Example:
+
+Python example with traversing over an ArrayList
+
+for item in my_list:
+    print("item: ", item)
+
+Keep in mind, this is an ArrayList, not a regular Array. With a regular Array traversing through the Array means
+item would be returning us the index, not the item itself, (meaning item from the example above would be an index, not 
+the item so we would have to use that index to search for that value again and then do whatever operation we want on 
+that value
+
+

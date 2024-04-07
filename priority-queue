@@ -1,0 +1,39 @@
+**Priority Queues**
+
+Still uses First in First Out (FIFO), but with restrictions
+
+A good way to think of these would be start of the world in minecraft hcf. Higher ranks get priority in the queue, and
+the higher ranks that join the queue first gets priority over the same ranks that joined after. But even though a higher
+rank might join after a lower rank, the higher rank gets priority and that lower rank doesn't get in until all of the
+priorities above it get in. Hence, priority queue
+
+Operations:
+ - Insert (Enqueue): O(n) (This is because its possible we have to go through the entire array comparing priorities)
+ - Remove (Dequeue): O(1)
+ - Peek: 0(1)
+
+It's important to note that Priority Queues are not kept in a circular fashion like regular queues. We are going to do
+it in a more linear format. So, we dont need a Front and Rear pointer, just the nItems pointer
+
+To know if an item has higher priority over the other, a certain function will get ran comparing whatever determines
+priority for each item
+
+For this example below, the lower your p is, the quicker you will get ran (the higher your priority is)
+
+[{v: 10, p: 8}|{v: 2, p: 6}|{v: 19, p: 4}|{v: 22, p: 1}| ]
+                                                        ^ nItems
+
+In order to determine the priority we check the p property of these objects using our generic function that checks
+priority
+
+Say we want to insert {v: 3, p: 5}
+We basically check every item in the array by comparing p property until we find the correct spot for our new object
+
+
+[{v: 10, p: 8}|{v: 2, p: 6}|{v: 3, p: 5}|{v: 19, p: 4}|{v: 22, p: 1}]
+                                                                     ^ nItems
+
+Now when removing an item, whatever is at the front gets removed (whatever has the highest priority)
+
+[{v: 10, p: 8}|{v: 2, p: 6}|{v: 3, p: 5}|{v: 19, p: 4}| ]
+                                                       ^ nItems

@@ -1,0 +1,27 @@
+"""Big O Notation"""
+
+
+Inserting into an array is O(1) "Big O One"
+Why?
+
+Let T = the time it takes to complete
+Let K = Constant
+let N = The number of items managed (number of items in the array)
+T=K is the equation for inserting
+But K is a constant not needed, so it can be rewritten as T=1 or O(1)
+
+Keep in mind:
+O(1) is excellent (Items are managed in very few steps and stays consistent throughout)
+O(log N) is good
+O(N) is fair
+O(N * log N) is poor
+O(N^2) is bad (Items are managed in many steps rising exponentially)
+
+Big O gives the slowest possible length something can run
+
+Example:
+    for()
+        for()
+            for()
+    Each for loop is N, so three for loops is O(N^3) (So very bad)
+

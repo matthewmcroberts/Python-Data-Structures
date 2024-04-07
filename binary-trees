@@ -1,0 +1,26 @@
+So... why would we use a binary tree over all of our other data structures we know about?
+
+Binary trees have
+ - Very fast searching due to being kept in order
+ - Inserts & Deletes are also very fast. We don't have to do any shifting
+
+But, the downfall is implementing a binary tree is much more complicated
+
+What makes a binary tree a binary tree?
+ - A binary tree is a binary tree when a node can only have 2 children
+
+So, back on the trees notes, all of the trees there were binary trees as each node only had 2 children
+
+Left-Child & Right-Child:
+
+        A
+       / \
+      B   C
+     / \ / \
+    D  E F  G
+        \
+         H
+
+H would be the right child of E
+D would be the left child of B
+etc.

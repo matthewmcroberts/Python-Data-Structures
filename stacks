@@ -1,0 +1,53 @@
+A stack is an array with more restrictions in our case
+A stack is using an array to function pretty much
+
+A stack is a very common data structure. It determines when something has its turn on the cpu to run
+Values in a stack stay in memory, the order of the items in the stack stay in order
+
+The pointer for a stack is always pointing to the top of the array
+
+We are using unordered arrays for explaining stacks
+
+[4|6|3|9| ]
+         ^ Top
+
+But stacks are usually drawn in a vertical way instead of horizontal
+
+    | |
+    | |
+    |7| <- Top
+    |8|
+    |16|
+
+So yes, it's technically using an array to work, but there are certain restrictions that differentiate it from an array
+
+With a stack you can do a few operations:
+ - Push (Pushes new item onto the top of the stack)
+ - Pop (Pop will remove an item from the stack)
+ - Peak (Looks at the value on the top of the stack)
+
+Restrictions:
+ So, a certain restriction is the fact that you can only push (insert) at the top of the stack. You cannot insert anywhere
+ else.
+
+ The same is said with pop, you can only remove the item at the top of the stack
+
+ And you can't peak wherever you want, only at the top of the stack
+
+Ex)
+ PUSH 2:
+  | |            | |
+  | |            |2| <- Top
+  |7| <- Top     |7|
+  |8|            |8|
+  |9|            |9|
+
+Now a peek is pretty much a delete but without the delete. It just returns the stack at the top
+
+Big O for push is O(1)
+Big O for pop is O(1)
+Big O for delete is O(1)
+
+Random note:
+ - Stacks can be a good way for dealing with screens, and it's great because the data for that screen doesn't have to
+   reload since its already in memory

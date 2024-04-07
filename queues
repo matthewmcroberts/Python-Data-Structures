@@ -1,0 +1,81 @@
+**Queues**
+
+Something to keep in mind when it comes to Stacks vs Queues:
+ - Queues: first to enter first to leave (FIFO - First in First Out)
+ - Stacks: first to enter last to leave (LIFO - Last in First Out)
+
+If you want something to 100% run in order, then a queue is what you want to use
+
+Operations:
+ - Insert
+   - Known as: insert, put, add, or enqueue
+ - Remove
+   - Known as: remove, delete, get, dequeue
+ - Peek
+   - Always known as peek
+
+  This is an example of where the pointers are in an empty queue:
+
+      [ | | | | ]
+  Rear ^ ^ Front
+
+  Rear is at index 0
+  Front is at index 1
+
+
+ **Inserting**
+
+  When inserting into a queue you are always inserting at the end, so this is known as O(1)
+
+  EMPTY INSERT (EMPTY ENQUEUE):
+
+        [ | | | | ]
+    Rear ^ ^ Front
+
+  So, say we insert/enqueue on the empty queue 7:
+
+      [ |7| | | ]
+         ^ Front
+         ^ Rear
+
+  Now lets insert/enqueue again, this time lets enqueue 4:
+
+        [ |7|4| | ]
+     Front ^ ^ Rear
+
+  INSERT (ENQUEUE) 7:
+
+     [ |7|4| | ]
+  Front ^ ^ Rear
+
+     [ |7|4|7| ]
+  Front ^   ^ Rear
+
+  BUT, this is a linear style for a queue, and is almost NEVER used due to there being better ways to use a queue
+  As you can see, using a linear fashion means the front of the array is pointless to keep track of since it's always
+  going to be index 0
+  Also, the rear can run out of space and go out of bounds if not enough memory is allocated for the array
+
+  SO, instead of using a linear style queue, we use a circular queue (look up example)
+
+
+ **Removing**
+
+  Always removing from the front, so this will also always be O(1)
+
+  (DEQUEUE): Using last example
+   - Remember, we remove the front
+
+       [ |9|3|2|7]
+    Front ^     ^ Rear
+
+     [ | |3|2|7]
+    Front ^   ^ Rear
+
+
+ **Peek**
+
+  This just means looking at the front of the queue, so this will be O(1)
+
+ IMPORTANT: You cannot traverse or search in a queue. You'd have to be removing from the end and keep checking if it's
+ what you're searching for, but in this case you shouldn't be using a queue because it defeats the purpose of one

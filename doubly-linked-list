@@ -1,0 +1,30 @@
+Can do everything a regular linkedlist can do, and a bit more
+
+Note, LinkedList only allow you to go to the next value, there is no way of going backwards in a normal linkedlist
+
+IMPORTANT: This is not a "Double-Ended LinkedList", that is a completely different data structure compared to a
+doublylinkedlist
+
+A doublylinkedlist can traverse forwards and backwards.
+A doublylinkedlist is also a double-ended linkedlist
+
+So, why would we ever use a regular linked list then?
+Well if the problem we are trying to solve doesn't require us to move backwards at all, then there is no point in implementing
+a doublylinkedlist considering it is much more complex and takes up more memory
+We're basically doubling the amount of pointers we have to keep track of
+
+Here's how the layout is a bit different from a linkedlist
+
+[First Link Pointer|Last Link Pointer|
+        |                               None
+        V                                ^
+ [Data Pointer|Next Link Pointer|Previous Link Pointer]
+       |              |
+       V              V
+ [f1|f2|f3|f4]       [Data Pointer|Next Link Pointer|Previous Link Pointer]
+                         |               |
+                         V               V
+                    [f1|f2|f3|f4]     [Data Pointer|Next Link Pointer|Previous Link Pointer] etc.
+                                                            |
+                                                            V
+                                                           None

@@ -1,0 +1,242 @@
+A tree is a graph, but a graph is not a tree
+
+A tree is a part of a graph, but with added restrictions
+
+Let's start first at looking at just a tree b/c to understand the different types of trees like binary tree, red black
+tree, etc. we need to understand a tree itself
+
+**Trees**
+
+A tree consists of nodes and each node is connected by edges
+ - Nodes are represented using usually a circle
+ - Edges are represented as solid lines connecting from one node to another
+
+        O
+       / \
+      O   O
+     / \ / \
+    O  O O  O
+
+What is a node?
+ - A node is where teh data is stored, similar to a link
+
+What is an edge?
+ - An edge connects one  node to another and represents how the nodes are related to each other
+   - Edges can be thought of as pointers in a linked list
+ - Edges are the only way to traverse a tree
+
+Now...
+Every tree has a root (root node) and this is the top node of the tree
+It's important to note that a tree can only have one root
+
+        O <- Root Node
+       / \
+      O   O
+     / \ / \
+    O  O O  O
+
+Paths:
+"A path is the route that you take to get from the root to a node somewhere in the tree"
+  - It lists out all of the nodes you have to go through to get to a specific node
+
+For a collection of nodes and edges to be considered a tree, there must be one and only one path from the root to any
+other node in the tree
+ - IF this is false at anypoint, then you no longer have a tree, it is just some sorted graph
+
+Ex)
+        A
+       / \
+      B   C
+     / \ / \
+    D  E F  G
+
+    This is a tree b/c you can only get to a node through one and one only path
+    For example, the path to D is ABD and that is it
+
+Parent Nodes:
+"Every node (except for the root node) has exactly one edge connecting it to a node above it, this node above it is
+ considered the parent node"
+  - The root must not have a parent node
+
+Ex)
+        A
+       / \
+      B   C
+     / \ / \
+    D  E F  G
+
+    A is the parent node to B
+    B is the parent node to D & E
+    C is the parent node to F & G
+    BUT...
+    It's important to note that
+    A is NOT the parent node to D
+
+Child Nodes:
+"Any node may have one or more edges connecting it to nodes below, these nodes below are called its children or branches"
+In simple terms, to be considered a child, it has to have an edge connecting to it
+
+Ex)
+        A
+       / \
+      B   C
+     / \ / \
+    D  E F  G
+
+    B is the child of A
+    C is the child of A
+    D is the child of B
+    G is the child of C
+    etc.
+    BUT...
+    E is not a child of A
+    etc.
+
+Sibling Nodes:
+"Any node other than the root node may have siblings, these nodes have a common parent node"
+So... in order to be siblings you must share a parent node
+
+Ex)
+        A
+       / \
+      B   C
+     / \ / \
+    D  E F  G
+        \
+         H
+
+    B & C are siblings
+    D & E are siblings
+    F & G are siblings
+    BUT...
+    D & E & F & G are NOT siblings (they do not all share the same parent node)
+    H has no sibling nodes
+
+Leaf:
+"A node that has no children"
+A tree may have many leaf nodes but only one root node
+
+Ex)
+        A
+       / \
+      B   C
+     / \ / \
+    D  E F  G
+        \
+         H
+
+    D is a leaf
+    F is a leaf
+    G is a leaf
+    H is a leaf
+    E & B & C & A are not leaf nodes (they have child nodes attached to it)
+
+Internal node:
+"A node that has children"
+
+Ex)
+        A
+       / \
+      B   C
+     / \ / \
+    D  E F  G
+        \
+         H
+
+    B is an internal node
+    A is an internal node
+    C is an internal node
+    E is an internal node
+    BUT...
+    D & F & G are not internal nodes because they have no child nodes
+
+Subtree:
+"Any node other than the root may be considered to be the root of a subtree"
+ - This subtree includes the children of the subtree's root along with its children's children and so on.
+ - A node's subtree contains all of its descendents
+
+Important: A root node cannot be a subtree
+
+Ex)
+        A
+       / \
+      B   C
+     / \ / \
+    D  E F  G
+        \
+         H
+
+    The subtree of B would be:
+        B
+       / \
+      D  E
+          \
+           H
+
+    The subtree of E would be
+       E
+        \
+         H
+
+Visiting:
+"A node is visited when a program arrives at the node, usually for performing some operation such as checking the value
+ of the data field"
+
+This term is useful for when creating algorithms. Keeping track of what node has already been visited
+
+Important to note:
+ - Passing over a node on its path to another node is not going to be considered a visited node
+
+Ex)
+    Say we want to get to H and do something with H's data
+
+        A
+       / \
+      B   C
+     / \ / \
+    D  E F  G
+        \
+         H
+
+    We would take the path ABEH, BUT it is important to note that A, B, and E are not considered visited. They were just
+    a part of the path used to get to H, but H is the only node we are doing something with its data, so H is considered
+    visited.
+
+Traversing:
+"To traverse a tree means to visit all the nodes in some specified order"
+
+For example, we could visit all the nodes in order of ascending key value, and this is considered a traversal of the
+tree because we have traversed all nodes
+
+Levels:
+"The level of the node refers to how many generations the node is from the root"
+ - Levels sometimes also might be referred to as "depth" of a node
+   - Meaning, what is the depth of node H? Answer: Depth of 3
+
+        A <- Level 0
+       / \
+      B   C <- Level 1
+     / \ / \
+    D  E F  G <- Level 2
+        \
+         H <- Level 3
+
+Keys:
+"Usually one data field in the object is designated as a key value for the node"
+
+Each node will have a key value, and that is a value that we choose inside the data
+
+The key is used to search for the item or perform other operations on the node
+
+        A
+       / \
+      B   C
+     / \ / \
+    D  E F  G
+        \
+         H
+
+So... the root nodes key would be A
+
+Now say we want to find the path to node H
+Well, we would say the path is ABEH and A, B, E, and H are considered the key for the nodes

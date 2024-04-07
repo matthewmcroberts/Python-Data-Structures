@@ -1,0 +1,61 @@
+Ordered Array
+
+The biggest change will be the search through an ordered array. We will be using binary search instead of brute force
+linear search like an unordered array.
+
+The Big O Notation for binary search is O(log(n))
+
+We basically start in the middle and keep cutting the array in half
+The middle is determined by doing (last index - first index) / 2
+
+SEARCH 6:
+
+[3|6|10|15|35]
+              ^ Pointer (Pointing to an invalid location since array is full)
+low = 3
+mid = 10
+high = 35
+
+We check if 6 = mid (which is 10), if not then we determine if 6 is greater than or less than 10. Well, it's less than 10, so high
+is now moved to 10
+
+low = 3
+mid = 6
+high = 10
+
+Now check again is mid = 6, yes, so we're done
+
+This binary search can be potentially bad if the item we are searching is at where our original low or high location is.
+Then we have to wait until mid gets moved onto our original high or low before completing the search, and this means its
+going to take as long as possible to find our searched number
+
+What about inserts?
+
+INSERT 8:
+
+You basically use the binary search again, and the 8 goes where it's supposed to go in the ordered array by overriding
+the item that is in its spot, and then move the item left or right
+
+[3|6|10| | ]
+        ^ Pointer
+
+low = 3
+mid = 6
+high = 10
+
+is mid greater than or less than 8? Greater than, this means our low mid and high change
+
+low = 3
+mid = 10
+high = 10
+
+is mid greater than or less than 8? Greater than, but we now have nowhere else to move our low, mid, and high, so 8
+gets placed where 10 is and 10 gets moved to the right
+
+[3|6|8|10| ]
+          ^ Pointer
+
+DELETE 6:
+
+You do the binary search for the 6, remove it by setting the item at that index to none, then move all items from the
+left to the right

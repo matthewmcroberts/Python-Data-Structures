@@ -1,0 +1,13 @@
+Ordered Linked Lists
+
+Operations are similar to LinkedList
+
+Operations:
+ - Search: O(n)
+ - Insert: O(n)
+   - Unlike LinkedList, this cannot be O(1) all the time since it isn't guaranteed that the link is going to go to the
+     beginning since it's supposed to be ordered
+   - Inserting in a LinkedList/OrderedList is quicker than an ArrayList b/c we don't have to do any shifting of elements
+ - Delete: O(n)
+   - Unless you are removing the first link, then it's O(1)
+

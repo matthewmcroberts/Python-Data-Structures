@@ -1,0 +1,125 @@
+Very similar to Arrays, but has restrictions.
+
+Works in a linear format, like an array. Except the implementation is vastly different. There are quite a few restrictions
+
+Linked Lists do not need a set size specified for it unlike Arrays. The Linked List dynamically shrinks and grows
+Therefore the items dont have to be in one location in memory, each item can be spread out somewhere else in memory.
+Each link keeps track of the next and previous links. This is how we can store the different datapoints somewhere else
+in memory, because each link knows the location of the next and previous value
+
+Pros:
+ -Dynamically Grows and Shrinks the list
+ -Saves memory by not having an entire chunk of memory taken up. The links are spread out. SO, links in linked lists only
+  take up memory as needed, and once no longer needed that memory is freed up
+Cons:
+ -You always have to start at the beginning of the linked lists and jump all around looking for the link we are looking
+  for. Therefore, searching is much slower and more complicated than an array.
+ -We can only have our data positioned in one linked list at a time, it can't be in other linked lists etc at the sametime
+  You'd have to make a copy, but at this point you no longer would be pointing to the original data you are wanting to
+  interact with
+
+We will not be using arrays to implement the LinkedLists, it just wouldn't make sense because the list won't be able to
+shrink and grow dynamically to the number of links
+
+SO, there are two main ways of implementing the linked lists
+Note: [f1|f2|f3|f4] etc. stands for fields in the link (data that the link stores)
+
+Option 1:
+ [f1|f2|f3|pointer]
+              |
+              V
+              [f1|f2|f3|pointer]
+                           |
+                           V
+                           [f1|f2|f3|pointer] etc.
+ Note: if there is no next pointer then the pointer will just be None
+ Basically the pointer is stored with the data fields, and points to the next link
+ But, this isn't really a OOP way
+
+Option 2:
+ [Data Pointer|Next Link Pointer]
+       |              |
+       V              V
+ [f1|f2|f3|f4]      [Data pointer|Next Link Pointer]
+                         |               |
+                         V               V
+                    [f1|f2|f3|f4]    [Data pointer|Next Link Pointer] etc.
+
+ This way is a lot less memory efficient, but in today's world machines have so much ram that it most likely won't really
+ matter
+ Note: if there is no next pointer then the pointer will just be None
+
+ NOTE: The Next Link Pointer for both options are not actually pointing to the pointer of that linked list, its pointing
+ to its memory location
+
+It's important to go over data typing and references to really understand how linked lists work
+
+Basic Data Type: int, string, float, double
+Reference Data Type: Pointer to a memory location of an existing data type
+
+Python is an un-typed language, so we do not have to declare the type when initializing the variable, unlike java
+
+IMPORTANT EXAMPLE:
+
+def test(a, b):
+    a += 1
+    b[0] += 1
+
+x = 1
+y = [1]
+test(x, y)
+print(x, y)
+
+OUTPUT: "1 [2]"
+
+Something to note is when passing in x to the function, a just becomes a copy of x, BUT when y is passed in, we are
+passing a reference to the list, so when using b[0] += 1, it actually is changing whatever y is because once again, b is
+a reference to the variable, not just a copy. b is pointing to the actual list passed in, not just a copy
+
+Back to Linked Lists...
+
+Operations:
+ - Insert:
+   - Beginning of LinkedList: O(1)
+   - End of LinkedList: O(1)
+   - But, slowest possible insert can be O(n) if the insert is not at the beginning or end
+ - Search:
+   - O(n)
+ - Delete:
+   - O(n) (run the search algorithm with a couple extra steps, but these steps don't really mess with speed)
+
+ Overall: Pretty much all operations are O(n)
+
+**INSERTING**
+
+INSERT 4 & 6:
+
+LinkedList      Link   Link
+First Pointer -> 4  ->  6
+
+INSERT 10 (in the middle of 4 & 6):
+
+LinkedList      Link   Link   Link
+First Pointer -> 4  ->  10  -> 6
+
+But, in order to put 10 there, we first need to make sure we do not lose our pointer to 6, so first point Link 10 to
+6, then remove Link 4's pointer from 6 and point it to 10
+
+**SEARCHING**
+
+Check what the first pointer is pointing to, if it's None then the linked list is empty
+But, if the first pointer is pointing to something, then pretty much keep following each pointer until you find
+the linkedlist you are searching for
+
+**DELETE**
+
+DELETE 10:
+
+LinkedList      Link   Link   Link
+First Pointer -> 4  ->  10  -> 6
+
+
+LinkedList      Link   Link           Link
+First Pointer -> 4  ->  6 -> None    10 -> None
+
+Now Python's garbage collection will get rid of the Link in memory

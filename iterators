@@ -1,0 +1,101 @@
+IMPORTANT:
+ - Python has built in magic methods for implementing this, so we don't technically need to do all of this,
+   but this is kind of how it works in the background
+
+Say we create a regular list in python:
+
+l1 = [12, 123, 453, 432, 12, 53, 67]
+
+Now say we want to find the average for some reason, well we do:
+avg = 0
+total = 0
+count = 0
+for x in list:
+total += x
+count += 1
+
+avg = total/count
+
+But why are we able to use the list in a for loop?
+Well... it's because of iterables.
+
+Notice how all data structures up to this point have been just traversing inside the class through a "traverse" function
+Well, the best way to do this would be using iterables.
+
+The limitation to our current traverse function is that it is only local to the object. We cannot loop through all
+of our values in, say our linkedlist, and find the average.
+
+**Iterator**
+
+"An iterator is a data structure that provides methods to step through all of the items contained in another data structure,
+visiting each item exactly one time"
+
+When using an iterator, the order of the items are fixed. Unless, of course, we perform an operator on our data structure
+
+Benefits?
+ - It's able to handle infinite sequences or sequences of indefinite length
+
+Iterators are data structures, so what does an iterator contain?
+
+Methods:
+ - __init__
+ - next:
+   - Similar to calling pop on a stack, moves the iterator to the next item and returns the item
+ - current:
+   - Similar to calling peek on a queue. Allows us to look at the current item without moving to the next item
+ - hasNext
+   - Saves us from having to call "while iterator.current() is not None" outside of the class
+
+These are really the only methods required to implement an iterator
+
+We're going to need to do a few checks before we start looping
+ Firstly, we need to check if it is empty
+ We need to make sure that the iterator ends when we reach the end of our data values
+
+Let's look at a small example for starting the iterator with pseudocode
+let variable "it" be our iterator object
+
+Option 1:
+ while it.hasNext():
+     then call current = it.next()
+     then do our loop body (whatever we are wanting to do with the items
+
+ This would be the same as doing "while it.current() is not None"
+
+Option 2:
+ try:
+   while True:
+     current = it.next()
+     then do loop body here
+ except StopIterationException:
+   pass
+
+Basically, it.next() will throw a StopIteractionException when there is no next, so then we will just move to our
+except clause. But we are really just using the exception to stop the loop, so we can just pass
+
+Now, what is happening when we use pythons built-in iterable?
+Say we have:
+
+l2 = [1, 2, 3, 4]
+for x in l2:
+    print(x)
+
+Well, in the background it is doing:
+
+it = l2.__iter__()
+try:
+    while True:
+        v = it.next()
+        <body>
+except StopIteration:
+    pass
+
+How do we implement this python specific iterator into our custom data structures?
+
+**Generators**
+
+We use Generators:
+  - Functions that create iterators
+  - Yield: takes care of creating the iterator class and its required methods for us
+
+
